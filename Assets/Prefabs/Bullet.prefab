@@ -22,7 +22,8 @@ GameObject:
   - 33: {fileID: 33000012416366028}
   - 136: {fileID: 136000011456698644}
   - 23: {fileID: 23000013903115106}
-  - 114: {fileID: 114000012969711648}
+  - 54: {fileID: 54000014217027342}
+  - 114: {fileID: 114000012697421176}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -79,7 +80,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010444209450}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114000012969711648
+--- !u!54 &54000014217027342
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010444209450}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &114000012697421176
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -87,12 +103,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010444209450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5b1b8b62dba4048a1f4cb254a43931, type: 3}
+  m_Script: {fileID: 11500000, guid: 19560ed22f575be46aa7575837a9efdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  distance: 2
-  direction: {x: 0, y: 0, z: 0}
+  distance: 3
+  currentTime: 0
 --- !u!136 &136000011456698644
 CapsuleCollider:
   m_ObjectHideFlags: 1

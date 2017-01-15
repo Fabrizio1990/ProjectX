@@ -10,14 +10,15 @@ public class BullletManager : MonoBehaviour {
 	private float actualDistance;
 
 	void Start () {
-		direction = -transform.forward;
+		//direction = transform.forward;
 		actualDistance = distance;
      
 	}
 		
 	void Update () {
 		if (actualDistance > 0) {
-			transform.Translate (direction * Time.deltaTime * speed);
+			//transform.Translate (direction * Time.deltaTime * speed);
+			transform.position += transform.up * Time.deltaTime * speed;
 			actualDistance -= Time.deltaTime * speed;
         }else
         {

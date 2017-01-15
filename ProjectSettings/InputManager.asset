@@ -32,7 +32,7 @@ InputManager:
     gravity: 3
     dead: 0.001
     sensitivity: 3
-    snap: 1
+    snap: 0
     invert: 0
     type: 0
     axis: 0
@@ -297,14 +297,14 @@ InputManager:
     m_Name: LookHorizontal
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 4
-    positiveButton: 6
+    negativeButton: '[4]'
+    positiveButton: '[6]'
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
     dead: 0.001
     sensitivity: 3
-    snap: 0
+    snap: 1
     invert: 0
     type: 0
     axis: 0
@@ -313,14 +313,14 @@ InputManager:
     m_Name: LookVertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 2
-    positiveButton: 8
+    negativeButton: '[2]'
+    positiveButton: '[8]'
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
     dead: 0.001
     sensitivity: 3
-    snap: 0
+    snap: 1
     invert: 0
     type: 0
     axis: 0

@@ -6,12 +6,14 @@ public class PlayerController : MonoBehaviour {
     public bool isMoving;
     public GameObject weapon;
     public GameObject bulletPrefab;
+	public float bulletSpeed;
     public float journeyTime = .3f;
     public int defAvailableMove;
     public int availableMove;
     // Use this for initialization
     void Start () {
         isMoving = false;
+		bulletSpeed = 500.0f;
         moveDistance = 1;
         resetMove();
     }
@@ -58,13 +60,13 @@ public class PlayerController : MonoBehaviour {
 
 		// Controllo con un raycast se posso effettivamente muovermi
 		if (!Physics.Raycast (transform.position, transform.forward, 1.0f)) {
+			isMoving = true;
 			StartCoroutine(MoveInDirection (_dir));
 		}
 	}
 
     public IEnumerator MoveInDirection(Vector3 destination)
     {
-        isMoving = true;
         float approximation = .5f;
 		destination = transform.position + destination;
 
@@ -92,8 +94,10 @@ public class PlayerController : MonoBehaviour {
 
     public void shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, weapon.transform.position , weapon.transform.rotation) as GameObject;
-        bullet.tag = this.gameObject.tag + "Bullet";
+		GameObject bullet = Instantiate(bulletPrefab, weapon.transform.position , weapon.transform.rotation) as GameObject;
+		Rigidbody rbBullet = bullet.GetComponent<Rigidbody> ();
+		bullet.tag = this.gameObject.tag + "Bullet";
+		rbBullet.AddForce (weapon.transform.forward * Time.fixedDeltaTime * bulletSpeed, ForceMode.Impulse);
         availableMove--;
     }
 
