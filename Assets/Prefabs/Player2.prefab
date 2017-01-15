@@ -220,5 +220,5 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1000010444209450, guid: 712f3a4b462fb9e4696402a9f916b952,
     type: 2}
   journeyTime: 0.3
-  defAvailableMove: 4
+  defAvailableMove: 3
   availableMove: 0

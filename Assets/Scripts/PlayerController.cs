@@ -49,39 +49,35 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public IEnumerator Move(Vector3 direction, Vector3 destination)
+	public void Move(float _rotation, Vector3 _dir){
+		// Ruoto il giocatore nella direzione
+		Rotate(new Vector3(0.0f, _rotation, 0.0f));
+		
+		// Moltiplico la direzione per la velocità
+		_dir *= moveDistance;
+
+		// Controllo con un raycast se posso effettivamente muovermi
+		if (!Physics.Raycast (transform.position, transform.forward, 1.0f)) {
+			StartCoroutine(MoveInDirection (_dir));
+		}
+	}
+
+    public IEnumerator MoveInDirection(Vector3 destination)
     {
-        Debug.Log("sto muovendo il " + this.gameObject.name);
         isMoving = true;
-        
         float approximation = .5f;
-        if (canMove()) { 
-            while (Vector3.Distance(transform.position, destination) > approximation && this.gameObject != null)
-            {
-                transform.position = Vector3.Lerp(transform.position, destination, journeyTime);
-                yield return null;
-            }
+		destination = transform.position + destination;
+
+		while (Vector3.Distance(transform.position, destination) > approximation && this.gameObject != null){
+        	transform.position = Vector3.Lerp(transform.position, destination, journeyTime);
+            yield return null;
+        }
 
         transform.position = destination;
         isMoving = false;
         availableMove--;
-        }
 
-        yield return null;
-    }
-
-    public bool canMove()
-    {
-        bool ret = true;
-        //RaycastHit hit = new RaycastHit();
-       Debug.DrawRay(transform.position, transform.forward, Color.black, 4f);
-        if (Physics.Raycast(transform.position, transform.forward, 1.0f))
-        {
-            ret = false;
-        }
-        Debug.Log(ret);
-
-        return ret;
+		yield return null;
     }
 
     public void Rotate(Vector3 direction)

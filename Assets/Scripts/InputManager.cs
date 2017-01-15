@@ -2,17 +2,16 @@
 using System.Collections;
 
 public class InputManager : MonoBehaviour {
-    public float journeyTime;
+
     [HideInInspector]
     public GameObject currPlayer;
     [HideInInspector]
     public PlayerController currPlayerScript;
-	// Use this for initialization
+
 	void Start () {
         
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 
         if (GameManager.instance.turn == 1)
@@ -26,61 +25,33 @@ public class InputManager : MonoBehaviour {
             currPlayerScript = GameManager.instance.Player2Script;
         }
         
-        if (!currPlayerScript.isMoving && currPlayerScript.availableMove>0 && currPlayer !=  null) { 
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                Vector3 destination = currPlayer.transform.position + new Vector3(0, 0, currPlayerScript.moveDistance);
-                Vector3 rotation = new Vector3(0, 0, 0);
-                currPlayerScript.Rotate(rotation);
-                if(currPlayerScript.canMove())
-                    StartCoroutine(currPlayerScript.Move(Vector3.up,destination));
+		if (currPlayer != null) {
+			if (!currPlayerScript.isMoving && currPlayerScript.availableMove > 0) { 
 
-            }else if (Input.GetKeyDown(KeyCode.S))
-            {
-                Vector3 destination = currPlayer.transform.position + new Vector3(0, 0, -currPlayerScript.moveDistance);
-                Vector3 rotation = new Vector3(0, 180, 0);
-                currPlayerScript.Rotate(rotation);
-                if (currPlayerScript.canMove())
-                    StartCoroutine(currPlayerScript.Move(Vector3.down, destination));
-            }else if(Input.GetKeyDown(KeyCode.A))
-            {
-                Vector3 destination = currPlayer.transform.position + new Vector3(-currPlayerScript.moveDistance, 0 , 0);
-                Vector3 rotation = new Vector3(0, 270, 0);
-                currPlayerScript.Rotate(rotation);
-                if (currPlayerScript.canMove())
-                    StartCoroutine(currPlayerScript.Move(Vector3.left,  destination));
-            }else if (Input.GetKeyDown(KeyCode.D))
-            {
-                Vector3 destination = currPlayer.transform.position + new Vector3(currPlayerScript.moveDistance, 0, 0);
-                Vector3 rotation = new Vector3(0, 90 , 0);
-                currPlayerScript.Rotate(rotation);
-                if (currPlayerScript.canMove())
-                    StartCoroutine(currPlayerScript.Move(Vector3.right,  destination));
-            }
-            else if (Input.GetKeyDown(KeyCode.Keypad8))
-            {
-                Vector3 rotation = new Vector3(0, 0, 0);
-                currPlayerScript.Rotate(rotation);
-            }
-            else if (Input.GetKeyDown(KeyCode.Keypad2))
-            {
-                Vector3 rotation = new Vector3(0, 180, 0);
-                currPlayerScript.Rotate(rotation);
-            }
-            else if (Input.GetKeyDown(KeyCode.Keypad4))
-            {
-                Vector3 rotation = new Vector3(0, 270, 0);
-                currPlayerScript.Rotate(rotation);
-            }
-            else if (Input.GetKeyDown(KeyCode.Keypad6))
-            {
-                Vector3 rotation = new Vector3(0, 90, 0);
-                currPlayerScript.Rotate(rotation);
-            }else if (Input.GetKeyDown(KeyCode.Space))
-            {
-                currPlayerScript.shoot();
-            }
-        }
+				Vector3 inputMovement = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")).normalized;
+				float rotation = 0.0f;
+
+				if (inputMovement == Vector3.right || inputMovement == Vector3.left) {
+					rotation = (Input.GetAxisRaw ("Horizontal") == 1) ? 90.0f : -90.0f;
+					currPlayerScript.Move (rotation, inputMovement);
+
+				} else if (inputMovement == Vector3.forward || inputMovement == Vector3.back) {
+					rotation = (Input.GetAxisRaw ("Vertical") == 1) ? 0.0f : 180.0f;
+					currPlayerScript.Move (rotation, inputMovement);
+				
+				}else if (Input.GetAxisRaw("LookHorizontal") != 0){
+					rotation = (Input.GetAxisRaw ("LookHorizontal") == 1) ? 90.0f : -90.0f;
+					currPlayerScript.Rotate(new Vector3(0.0f, rotation, 0.0f));
+
+	            }else if (Input.GetAxisRaw("LookVertical") != 0){
+					rotation = (Input.GetAxisRaw ("LookVertical") == 1) ? 0.0f : 180.0f;
+					currPlayerScript.Rotate(new Vector3(0.0f, rotation, 0.0f));
+
+	            }else if (Input.GetKeyDown(KeyCode.Space)){
+	                currPlayerScript.shoot();
+	            }
+			}
+		}
     }
 
 
