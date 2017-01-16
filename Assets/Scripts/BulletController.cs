@@ -6,13 +6,15 @@ public class BulletController : MonoBehaviour {
 	public float distance;
 	public float currentTime;
 
-	//private Rigidbody rb;
+	private Rigidbody rb;
+	private Collider bulletCollider;
 	private Vector3 destinaton;
 	private Vector3 origin;
 	private Vector3 direction;
 
 	void Awake(){
-		//rb = GetComponent<Rigidbody> ();
+		rb = GetComponent<Rigidbody> ();
+		bulletCollider = GetComponent<SphereCollider>();
 	}
 
 	void Start () {
@@ -20,14 +22,22 @@ public class BulletController : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		if (Mathf.RoundToInt(Vector3.Distance (transform.position, destinaton)) == 0){
+
+		/*if (Mathf.RoundToInt(Vector3.Distance(new Vector3(transform.position.x, 0.0f, transform.position.z), destinaton)) == 0){
 			Destroy (this.gameObject);
+		}*/
+
+		RaycastHit hit;
+		if (Physics.Raycast (transform.position, direction, out hit, 1.0f)) {
+			if (hit.collider.gameObject.tag == "Panel") {
+				bulletCollider.isTrigger = false;
+			}
 		}
 	}
 
 	private void SetNewDestination(Vector3 _origin, Vector3 _direction){
 		// ottengo l'origine del bullet
-		origin = _origin;
+		origin = new Vector3(_origin.x, 0.0f, _origin.z);
 
 		// Trovo la sua direzione, la normalizzo e la moltiplico per la distanza
 		direction = _direction;
@@ -35,5 +45,16 @@ public class BulletController : MonoBehaviour {
 		// Aggiungo la direzione all'origine per ottenere la destinazione
 		destinaton = origin + direction;
 	}
+
+	void OnCollisionExit(Collision other){
+		if (other.gameObject.tag == "Diagonal1") {
+			SetNewDestination(transform.position, rb.velocity.normalized * distance);
 		
+			if (bulletCollider.isTrigger)
+				bulletCollider.isTrigger = false;
+		}
+
+	}
+
+
 }

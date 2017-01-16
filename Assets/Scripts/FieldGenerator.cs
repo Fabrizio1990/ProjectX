@@ -11,6 +11,7 @@ public class FieldGenerator : MonoBehaviour
 	public int diagonalWalls1 = 5;
 	public int diagonalWalls2 = 5;
 	public GameObject wallPrefab;
+	public GameObject FloorGroup;
 	public GameObject terrainPrefab;
 	public GameObject diagonalWall1Prefab;
 	public GameObject diagonalWall2Prefab;
@@ -94,7 +95,8 @@ public class FieldGenerator : MonoBehaviour
 		// Generate Terrain
 		for(int i = 0; i < width; i ++){
 			for(int j = 0; j < height; j ++){
-				Instantiate (terrainPrefab, new Vector3 (fieldSpawnPoint.transform.position.x + i, 0.0f, fieldSpawnPoint.transform.position.z + j), Quaternion.identity);
+				GameObject c = Instantiate (terrainPrefab, new Vector3 (fieldSpawnPoint.transform.position.x + i, 0.0f, fieldSpawnPoint.transform.position.z + j), Quaternion.identity) as GameObject;
+				c.transform.SetParent (FloorGroup.transform);
 			}
 		}
 	}
@@ -139,7 +141,7 @@ public class FieldGenerator : MonoBehaviour
 			row = Random.Range (1, height - 1);
 			col = Random.Range (1, width - 1);
 			if (field [row, col] == '\0') {
-				player.transform.position = new Vector3 (col, 0.2f, row);
+				player.transform.position = new Vector3 (col, 0.5f, row);
 				field [row, col] = playerChar;
 				ok = true;
 			}
@@ -151,7 +153,7 @@ public class FieldGenerator : MonoBehaviour
 		GameObject newGameObject;
 		Vector3 gameObjectPosition;
 
-		gameObjectPosition = new Vector3 (col, 0, row);
+		gameObjectPosition = new Vector3 (col, 0.5f, row);
 		newGameObject = Instantiate (prefab) as GameObject;
 		newGameObject.transform.position = gameObjectPosition;
 		newGameObject.tag = gameObjectTag;

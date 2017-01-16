@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
-        if (GameManager.instance.turn == 3)
-        {
+      /*  if (GameManager.instance.turn == 3)
+        {*/
             switch (other.gameObject.tag) { 
                 case "Moveable-N":
                 case "Moveable-E":
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour {
 
             }
            
-        }
+        //}
     }
 
 	public void Move(float _rotation, Vector3 _dir){
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour {
 		GameObject bullet = Instantiate(bulletPrefab, weapon.transform.position , weapon.transform.rotation) as GameObject;
 		Rigidbody rbBullet = bullet.GetComponent<Rigidbody> ();
 		bullet.tag = this.gameObject.tag + "Bullet";
-		rbBullet.AddForce (weapon.transform.forward * Time.fixedDeltaTime * bulletSpeed, ForceMode.Impulse);
+		rbBullet.AddForce (weapon.transform.up * Time.fixedDeltaTime * bulletSpeed, ForceMode.Impulse);
         availableMove--;
     }
 

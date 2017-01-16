@@ -118,6 +118,7 @@ MonoBehaviour:
   diagonalWalls1: 5
   diagonalWalls2: 5
   wallPrefab: {fileID: 1000010808608204, guid: a0d3ab308ad26a6428d6b462ae5fdd5f, type: 2}
+  FloorGroup: {fileID: 0}
   terrainPrefab: {fileID: 1000013947110140, guid: 8e13ac932eeb86343afe1243d1feacba,
     type: 2}
   diagonalWall1Prefab: {fileID: 1000013770650694, guid: cabe047ea4aab524fa0fbac956df9a4f,
