@@ -47,7 +47,7 @@ public class MovingBlockBehaviour : MonoBehaviour {
 
 		InMov = false;
 		transform.position = origin + dir;
-        GameManager.instance.totalWallMoved++;
+        //GameManager.instance.totalWallMoved++;
         ChangeType();
         yield return null;
 	}

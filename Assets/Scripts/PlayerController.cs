@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour {
 		_dir *= moveDistance;
 
 		// Controllo con un raycast se posso effettivamente muovermi
-		if (!Physics.Raycast (transform.position, transform.forward, 1.0f)) {
+		if (!Physics.Raycast (transform.position, transform.forward, moveDistance)) {
 			isMoving = true;
 			StartCoroutine(MoveInDirection (_dir));
 		}

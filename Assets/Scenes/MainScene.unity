@@ -345,16 +345,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114000010320361850, guid: 636c356f1dc59e04ba7c2af82a61df6d,
-        type: 2}
-      propertyPath: Player1
-      value: 
-      objectReference: {fileID: 895386073}
-    - target: {fileID: 114000010320361850, guid: 636c356f1dc59e04ba7c2af82a61df6d,
-        type: 2}
-      propertyPath: Player2
-      value: 
-      objectReference: {fileID: 747323042}
     - target: {fileID: 114000013516375830, guid: 636c356f1dc59e04ba7c2af82a61df6d,
         type: 2}
       propertyPath: FloorGroup
@@ -373,6 +363,16 @@ Prefab:
     - target: {fileID: 114000013516375830, guid: 636c356f1dc59e04ba7c2af82a61df6d,
         type: 2}
       propertyPath: player2
+      value: 
+      objectReference: {fileID: 747323042}
+    - target: {fileID: 114000010320361850, guid: 636c356f1dc59e04ba7c2af82a61df6d,
+        type: 2}
+      propertyPath: player1GameObject
+      value: 
+      objectReference: {fileID: 895386073}
+    - target: {fileID: 114000010320361850, guid: 636c356f1dc59e04ba7c2af82a61df6d,
+        type: 2}
+      propertyPath: player2GameObject
       value: 
       objectReference: {fileID: 747323042}
     m_RemovedComponents: []

@@ -3,34 +3,48 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    [HideInInspector]
-    public FieldGenerator fieldScript;
-    [HideInInspector]
-    public InputManager inputController;
-    public GameObject Player1;
-    public GameObject Player2;
+    public static GameManager instance = null;								// Variabile Statica contenente l'istanza del GameManager.
 
     [HideInInspector]
-    public PlayerController Player1Script;
+    public FieldGenerator fieldScript;										// Variabile dell'istanza del generatore di terreno.
     [HideInInspector]
-    public PlayerController Player2Script;
+    public InputManager inputController;									// Input.
+	[HideInInspector]
+	public PlayerController currentPlayer;									// Variabile che contiene il giocatore attuale.
+    public GameObject player1GameObject;									// Variabile che contiene il GameObject del Giocatore 1.
+	public GameObject player2GameObject;									// Variabile che contiene il GameObject del Giocatore 2.
+    public int gameTurn;													// Variabile che segna il turno attuale.
+ 
+	//public int totalWallMoved;											// Non ricordo cazzo.
 
-    public int turn;
-    public int totalWallMoved;
-
-    private bool cicloEseguito;
-    private bool wallEnded;
+    private bool wallEnded;													// Non ricordo cazzo - Il ritorno.
+	private PlayerController[] players = new PlayerController[2];			// Array dei due giocatori.
 
     void Awake()
     {
-        instance = this;
-        inputController = GetComponent<InputManager>();
-        Player1Script = Player1.GetComponent<PlayerController>();
-        Player2Script = Player2.GetComponent<PlayerController>();
-        fieldScript = GetComponent<FieldGenerator>();
-        totalWallMoved = 0;
-        turn = 1;
+		// Singleton per evitare doppie istanze del GameManager.
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy (this.gameObject);
+		}
+
+		// Otteniamo l'input e il fieldGenerator.
+		inputController = GetComponent<InputManager>();
+		fieldScript = GetComponent<FieldGenerator>();
+
+		// Otteniamo gli script dei due giocatori.
+		players [0] = player1GameObject.GetComponent<PlayerController> ();
+		players [1] = player2GameObject.GetComponent<PlayerController> ();
+
+		// Il player che inizia è il player1.
+		currentPlayer = players [0];
+
+		// Il turno attuale è il turno 1.
+		gameTurn = 1;
+
+		//totalWallMoved = 0;
+
     }
 
     void Start()
@@ -40,43 +54,31 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (turn == 1 && Player1Script.availableMove == 0)
-        {
-            NextTurn();
-            Player2Script.resetMove();
-        }
-        else if (turn == 2 && Player2Script.availableMove == 0)
-        {
-            NextTurn();
-            Player1Script.resetMove();
-        }
-        else if (turn == 3)
-        {
+		if (gameTurn != 3) {
+			if (players [getPlayerByTurn (gameTurn)].availableMove == 0) {
+				players [getPlayerByTurn (gameTurn)].resetMove ();
+				NextTurn ();
 
-
+			}
+		} else {
             // Muovo i Muri.
             for (int i = 0; i < fieldScript.moveableWallsArray.Length; i++)
             {
                 fieldScript.moveableWallsArray[i].GetComponent<MovingBlockBehaviour>().InitLerp(1.0f);
             }
 
-
-
-
             NextTurn();
-
         }
     }
 
-    void NextTurn()
-    {
-        if (turn == 3)
-        {
-            turn = 1;
-        }
-        else
-        {
-            turn++;
-        }
+	// Assegno il turno successivo e Cambio il giocatore attuale.
+    private void NextTurn(){
+		gameTurn = (gameTurn == 3) ? 1 : (gameTurn + 1);
+		currentPlayer = players [getPlayerByTurn(gameTurn)];
     }
+
+	// Ottengo l'id del player corrispondente al turno nell'array.
+	int getPlayerByTurn(int turn){
+		return (turn == 1) ? 0 : 1;
+	}
 }
