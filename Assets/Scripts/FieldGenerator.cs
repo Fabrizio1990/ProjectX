@@ -42,8 +42,6 @@ public class FieldGenerator : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-      
-
         moveableWallsArray = new GameObject[moveableWalls];
 		Generate ();
 	}

@@ -25,7 +25,7 @@ public class BulletController : MonoBehaviour {
 		}
 	}
 
-	void SetNewDestination(Vector3 _origin, Vector3 _direction){
+	private void SetNewDestination(Vector3 _origin, Vector3 _direction){
 		// ottengo l'origine del bullet
 		origin = _origin;
 
@@ -35,4 +35,5 @@ public class BulletController : MonoBehaviour {
 		// Aggiungo la direzione all'origine per ottenere la destinazione
 		destinaton = origin + direction;
 	}
+		
 }

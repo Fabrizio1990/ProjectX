@@ -28,7 +28,8 @@ public class InputManager : MonoBehaviour {
 		if (currPlayer != null) {
 			if (!currPlayerScript.isMoving && currPlayerScript.availableMove > 0) { 
 
-				Vector3 inputMovement = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")).normalized;
+				//Vector3 inputMovement = new Vector3 (Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")).normalized;
+				Vector3 inputMovement = new Vector3 (InputToInt(KeyCode.D) - InputToInt(KeyCode.A), 0.0f, InputToInt(KeyCode.W) - InputToInt(KeyCode.S)).normalized;
 				float rotation = 0.0f;
 
 				if (inputMovement == Vector3.right || inputMovement == Vector3.left) {
@@ -54,8 +55,12 @@ public class InputManager : MonoBehaviour {
 		}
     }
 
-
-    
-
+	int InputToInt(KeyCode input){
+		if (Input.GetKeyDown (input)) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 
 }

@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
-        //if (GameManager.instance.turn == 3)
-        //{
+        if (GameManager.instance.turn == 3)
+        {
             switch (other.gameObject.tag) { 
                 case "Moveable-N":
                 case "Moveable-E":
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour {
                 default:
                     break;
 
-            //}
+            }
            
         }
     }

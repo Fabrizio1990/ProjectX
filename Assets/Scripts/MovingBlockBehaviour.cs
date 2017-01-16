@@ -12,23 +12,22 @@ public class MovingBlockBehaviour : MonoBehaviour {
 
 		switch(name){
 		case "Moveable-N":
-			finalDir = new Vector3 (0.0f, 0.0f, 1.0f);
+			finalDir = Vector3.forward;
 			break;
 		case "Moveable-S":
-			finalDir = new Vector3 (0.0f, 0.0f, -1.0f);
+			finalDir = Vector3.back;
 			break;
 		case "Moveable-E":
-			finalDir = new Vector3 (1.0f, 0.0f, 0.0f);
+			finalDir = Vector3.right;
 			break;
 		case "Moveable-W":
-			finalDir = new Vector3 (-1.0f, 0.0f, 0.0f);
+			finalDir = Vector3.left;
 			break;
 		}
 
 		return finalDir;
 
 	}
-
 
 	public void InitLerp(float maxDistanceRaycast){
 		Vector3 dir = getDirectionFromTag(gameObject.tag);
@@ -41,10 +40,11 @@ public class MovingBlockBehaviour : MonoBehaviour {
 	
 	IEnumerator Move(Vector3 dir){
 		Vector3 origin = transform.position;
-		while (Vector3.Distance(transform.position, origin + dir) > .1) {
-			transform.position = Vector3.Lerp (transform.position, origin + dir, Time.deltaTime * speed); 
-			yield return new WaitForSeconds (Time.deltaTime);
+		while (Mathf.RoundToInt(Vector3.Distance(transform.position, origin + dir)) > 0) {
+			transform.position = Vector3.Lerp (transform.position, origin + dir, Time.deltaTime * 5.0f); 
+			yield return null;
 		}
+
 		InMov = false;
 		transform.position = origin + dir;
         GameManager.instance.totalWallMoved++;
