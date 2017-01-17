@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 		if (gameTurn != 3) {
-			if (players [getPlayerByTurn (gameTurn)].availableMove == 0) {
+			if (players [getPlayerByTurn (gameTurn)].endTurn == true) {
 				players [getPlayerByTurn (gameTurn)].resetMove ();
 				NextTurn ();
 

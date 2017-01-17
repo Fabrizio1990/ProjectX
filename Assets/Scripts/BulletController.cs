@@ -27,12 +27,12 @@ public class BulletController : MonoBehaviour {
 			Destroy (this.gameObject);
 		}*/
 
-		RaycastHit hit;
+		/*RaycastHit hit;
 		if (Physics.Raycast (transform.position, direction, out hit, 1.0f)) {
-			if (hit.collider.gameObject.tag == "Panel") {
+			if (hit.collider.gameObject.name == "D") {
 				bulletCollider.isTrigger = false;
 			}
-		}
+		}*/
 	}
 
 	private void SetNewDestination(Vector3 _origin, Vector3 _direction){
@@ -50,30 +50,10 @@ public class BulletController : MonoBehaviour {
 		if (other.gameObject.tag == "Diagonal1") {
 			SetNewDestination(transform.position, rb.velocity.normalized * distance);
 		
-			if (bulletCollider.isTrigger)
-				bulletCollider.isTrigger = false;
+			if (!bulletCollider.isTrigger) {
+				bulletCollider.isTrigger = true;
+			}
 		}
 
 	}
-
-    void OnTriggerEnter(Collider other)
-    {
-        //Distruggo proiettile se sbatte contro muri che si muovono
-        if (other.gameObject.tag == "Moveable-N")
-        {
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.tag == "Moveable-S")
-        {
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.tag == "Moveable-W")
-        {
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.tag == "Moveable-E")
-        {
-            Destroy(gameObject);
-        }
-    }
 }

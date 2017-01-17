@@ -60,4 +60,9 @@ public class MovingBlockBehaviour : MonoBehaviour {
         gameObject.GetComponent<MeshRenderer>().material.color = GameManager.instance.fieldScript.moveableColors[randomString];
     }
 
+	void OnTriggerEnter(Collider other){
+		if (other.gameObject.name == "Bullet(Clone)") {
+			Destroy (other.gameObject);
+		}
+	}
 }

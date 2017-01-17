@@ -47,6 +47,10 @@ public class InputManager : MonoBehaviour {
 	            }
 			}
 
+			if (currentPlayer.availableMove == 0 && !currentPlayer.endTurn) {
+				if (Input.GetKey (KeyCode.KeypadEnter))
+					currentPlayer.endTurn = true;
+			}
 		}
     }
 

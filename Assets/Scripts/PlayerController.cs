@@ -10,11 +10,14 @@ public class PlayerController : MonoBehaviour {
     public float journeyTime = .3f;
     public int defAvailableMove;
     public int availableMove;
+	public bool endTurn;
+
     // Use this for initialization
     void Start () {
         isMoving = false;
 		bulletSpeed = 500.0f;
         moveDistance = 1;
+		endTurn = false;
         resetMove();
     }
 	
@@ -90,6 +93,7 @@ public class PlayerController : MonoBehaviour {
     public void resetMove()
     {
         availableMove = defAvailableMove;
+		endTurn = false;
     }
 
     public void shoot()
