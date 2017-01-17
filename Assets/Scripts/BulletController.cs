@@ -56,5 +56,24 @@ public class BulletController : MonoBehaviour {
 
 	}
 
-
+    void OnTriggerEnter(Collider other)
+    {
+        //Distruggo proiettile se sbatte contro muri che si muovono
+        if (other.gameObject.tag == "Moveable-N")
+        {
+            Destroy(gameObject);
+        }
+        else if (other.gameObject.tag == "Moveable-S")
+        {
+            Destroy(gameObject);
+        }
+        else if (other.gameObject.tag == "Moveable-W")
+        {
+            Destroy(gameObject);
+        }
+        else if (other.gameObject.tag == "Moveable-E")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
