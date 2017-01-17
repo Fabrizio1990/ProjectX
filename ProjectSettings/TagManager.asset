@@ -19,6 +19,10 @@ TagManager:
   - PlaneDevSX
   - Player1Bullet
   - Player2Bullet
+  - Player3Bullet
+  - Player4Bullet
+  - Player3
+  - Player4
   layers:
   - Default
   - TransparentFX

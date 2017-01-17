@@ -26,7 +26,7 @@ GameObject:
   - 54: {fileID: 54000013012399232}
   m_Layer: 0
   m_Name: Player2
-  m_TagString: Player2
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,7 +219,8 @@ MonoBehaviour:
   weapon: {fileID: 1000010976684250}
   bulletPrefab: {fileID: 1000010444209450, guid: 712f3a4b462fb9e4696402a9f916b952,
     type: 2}
-  bulletSpeed: 0
+  bulletSpeed: 500
   journeyTime: 0.3
   defAvailableMove: 3
   availableMove: 0
+  endTurn: 0

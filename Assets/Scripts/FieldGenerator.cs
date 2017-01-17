@@ -22,10 +22,10 @@ public class FieldGenerator : MonoBehaviour
     public string[] moveableTags = { "Moveable-N", "Moveable-S", "Moveable-W", "Moveable-E" };
     public Color[] moveableColors = { Color.red, Color.magenta, Color.blue, Color.cyan };
 
+    private char[] playerChars = { 'A', 'B', 'C', 'D' };
+    //private Color[] playerColors = { Color.yellow, Color.green, Color.black, Color.grey };
     private char[,] field;
-	private const char p1 = 'A';
-	private const char p2 = 'B';
-	private const char nWall = 'N';
+    private const char nWall = 'N';
 	private const char sWall = 'S';
 	private const char wWall = 'W';
 	private const char eWall = 'E';
@@ -40,11 +40,15 @@ public class FieldGenerator : MonoBehaviour
 	private const string diagonalWall1 = "Diagonal1";
 	private const string diagonalWall2 = "Diagonal2";
 
+    void Awake()
+    {
+        moveableWallsArray = new GameObject[moveableWalls];
+    }
+
 	// Use this for initialization
 	void Start ()
 	{
-        moveableWallsArray = new GameObject[moveableWalls];
-		Generate ();
+       
 	}
 
 	public void Generate ()
@@ -71,10 +75,11 @@ public class FieldGenerator : MonoBehaviour
 		diagonal2WallsArray = GenerateInnerWalls (diagonalWall2Prefab, diagonalWalls1, new string[]{ diagonalWall2 }, new char[] { d2Wall });
 		DebugWalls (fixedWallsArray, Color.gray, Color.red, Color.magenta, Color.blue, Color.cyan); //Color nWallColor, Color sWallColor, Color wWallColor, Color eWallColor
         DebugWalls (moveableWallsArray, Color.gray, Color.red, Color.magenta, Color.blue, Color.cyan);
-		GeneratePlayer (player1, p1);
-		GeneratePlayer (player2, p2);
-		DebugPlayer (player1, Color.yellow);
-		DebugPlayer (player2, Color.green);
+
+        for(int i = 0; i< GameManager.instance.numberOfPlayer; i++) {
+		    GeneratePlayer (GameManager.instance.players[i], playerChars[i]);
+            //DebugPlayer(GameManager.instance.players[i], playerColors[i]);
+        }
 	}
 
 	private void GenerateFieldFrame ()

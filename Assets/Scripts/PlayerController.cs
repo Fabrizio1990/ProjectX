@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour {
         isMoving = false;
 		bulletSpeed = 500.0f;
         moveDistance = 1;
-		endTurn = false;
         resetMove();
     }
 	
@@ -28,15 +27,13 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player1Bullet" && this.gameObject.tag == "Player2")
-        {
-            Destroy(other.gameObject);
-            Destroy(this.gameObject);
-        }else if(other.gameObject.tag == "Player2Bullet" && this.gameObject.tag == "Player1")
+        //se vengo colpito dal proiettile di un altro giocatore muoio (TODO: disattivare il gameobject non distruggerlo e gestire i nuovi turni che diminuiranno)
+        if(other.gameObject.tag != this.gameObject.name + "Bullet")
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
+       
       /*  if (GameManager.instance.turn == 3)
         {*/
             switch (other.gameObject.tag) { 
@@ -100,7 +97,7 @@ public class PlayerController : MonoBehaviour {
     {
 		GameObject bullet = Instantiate(bulletPrefab, weapon.transform.position , weapon.transform.rotation) as GameObject;
 		Rigidbody rbBullet = bullet.GetComponent<Rigidbody> ();
-		bullet.tag = this.gameObject.tag + "Bullet";
+		bullet.tag = this.gameObject.name + "Bullet";
 		rbBullet.AddForce (weapon.transform.up * Time.fixedDeltaTime * bulletSpeed, ForceMode.Impulse);
         availableMove--;
     }
