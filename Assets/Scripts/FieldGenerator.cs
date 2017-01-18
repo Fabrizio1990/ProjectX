@@ -48,7 +48,7 @@ public class FieldGenerator : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-       
+
 	}
 
 	public void Generate ()

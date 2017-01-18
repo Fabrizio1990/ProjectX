@@ -53,6 +53,17 @@ public class BulletController : MonoBehaviour {
 			if (!bulletCollider.isTrigger) {
 				bulletCollider.isTrigger = true;
 			}
+
+			Vector3 dir = rb.velocity;
+
+			if (Mathf.Abs (dir.x) > Mathf.Abs (dir.z)) {
+				dir = new Vector3 (Mathf.RoundToInt (dir.x), Mathf.RoundToInt (dir.y), 0.0f);
+			} else {
+				dir = new Vector3 (0.0f, Mathf.RoundToInt (dir.y), Mathf.RoundToInt (dir.z));
+			}
+
+			rb.velocity = dir;
+
 		}
 
 	}
