@@ -72,7 +72,7 @@ public class FieldGenerator : MonoBehaviour
 			wWall
 		});
 		diagonal1WallsArray = GenerateInnerWalls (diagonalWall1Prefab, diagonalWalls1, new string[]{ diagonalWall1 }, new char[] { d1Wall });
-		diagonal2WallsArray = GenerateInnerWalls (diagonalWall2Prefab, diagonalWalls1, new string[]{ diagonalWall2 }, new char[] { d2Wall });
+		diagonal2WallsArray = GenerateInnerWalls (diagonalWall2Prefab, diagonalWalls1, new string[]{ diagonalWall1 }, new char[] { d1Wall });
 		DebugWalls (fixedWallsArray, Color.gray, Color.red, Color.magenta, Color.blue, Color.cyan); //Color nWallColor, Color sWallColor, Color wWallColor, Color eWallColor
         DebugWalls (moveableWallsArray, Color.gray, Color.red, Color.magenta, Color.blue, Color.cyan);
 

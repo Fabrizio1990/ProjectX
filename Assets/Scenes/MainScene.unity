@@ -458,6 +458,12 @@ Prefab:
       value: 
       objectReference: {fileID: 1000012832772308, guid: ed5428243c5799847abdfe279d86100d,
         type: 2}
+    - target: {fileID: 114000013516375830, guid: 636c356f1dc59e04ba7c2af82a61df6d,
+        type: 2}
+      propertyPath: diagonalWall2Prefab
+      value: 
+      objectReference: {fileID: 1000011925154504, guid: ba0d44ea6e3ebec4aae80d7486f39932,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 636c356f1dc59e04ba7c2af82a61df6d, type: 2}
   m_IsPrefabParent: 0

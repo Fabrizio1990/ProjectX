@@ -27,12 +27,12 @@ public class BulletController : MonoBehaviour {
 			Destroy (this.gameObject);
 		}*/
 
-		/*RaycastHit hit;
+		RaycastHit hit;
 		if (Physics.Raycast (transform.position, direction, out hit, 1.0f)) {
-			if (hit.collider.gameObject.name == "D") {
+			if (hit.collider.gameObject.tag == "Diagonal1") {
 				bulletCollider.isTrigger = false;
 			}
-		}*/
+		}
 	}
 
 	private void SetNewDestination(Vector3 _origin, Vector3 _direction){
@@ -49,7 +49,7 @@ public class BulletController : MonoBehaviour {
 	void OnCollisionExit(Collision other){
 		if (other.gameObject.tag == "Diagonal1") {
 			SetNewDestination(transform.position, rb.velocity.normalized * distance);
-		
+
 			if (!bulletCollider.isTrigger) {
 				bulletCollider.isTrigger = true;
 			}
@@ -57,9 +57,9 @@ public class BulletController : MonoBehaviour {
 			Vector3 dir = rb.velocity;
 
 			if (Mathf.Abs (dir.x) > Mathf.Abs (dir.z)) {
-				dir = new Vector3 (Mathf.RoundToInt (dir.x), Mathf.RoundToInt (dir.y), 0.0f);
+				dir = new Vector3 (dir.x, Mathf.RoundToInt (dir.y), 0.0f);
 			} else {
-				dir = new Vector3 (0.0f, Mathf.RoundToInt (dir.y), Mathf.RoundToInt (dir.z));
+				dir = new Vector3 (0.0f, Mathf.RoundToInt (dir.y), dir.z);
 			}
 
 			rb.velocity = dir;
