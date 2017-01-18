@@ -106,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19560ed22f575be46aa7575837a9efdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 3
-  currentTime: 0
+  distance: 30
+  diagonalWallTag: Diagonal1
 --- !u!135 &135000011980739462
 SphereCollider:
   m_ObjectHideFlags: 1
