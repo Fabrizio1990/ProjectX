@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     public FieldGenerator fieldScript;										// Variabile dell'istanza del generatore di terreno.
     [HideInInspector]
     public InputManager inputController;									// Input.
-	
 
     public int gameTurn;													// Variabile che segna il turno attuale.
  

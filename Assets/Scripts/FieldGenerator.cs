@@ -89,13 +89,13 @@ public class FieldGenerator : MonoBehaviour
 
 		// North and south frame
 		for (col = 0; col < width; col++) {
-			GenerateGameObject (wallPrefab, 0, col, moveableNWall, nWall);
-			GenerateGameObject (wallPrefab, height - 1, col, moveableSWall, sWall);
+			GenerateGameObject (wallPrefab, 0, col, moveableNWall, nWall, "N-Frame." + col, fieldSpawnPoint.transform.GetChild(0).transform);
+			GenerateGameObject (wallPrefab, height - 1, col, moveableSWall, sWall, "S-Frame." + col, fieldSpawnPoint.transform.GetChild(0).transform);
 		}
 		// West and east frame
 		for (row = 1; row < height - 1; row++) {
-			GenerateGameObject (wallPrefab, row, 0, moveableWWall, wWall);
-			GenerateGameObject (wallPrefab, row, width - 1, moveableEWall, eWall);
+			GenerateGameObject (wallPrefab, row, 0, moveableWWall, wWall, "W-Frame." + col, fieldSpawnPoint.transform.GetChild(0).transform);
+			GenerateGameObject (wallPrefab, row, width - 1, moveableEWall, eWall, "E-Frame." + col, fieldSpawnPoint.transform.GetChild(0).transform);
 		}
 		// Generate Terrain
 		for(int i = 0; i < width; i ++){
@@ -127,7 +127,7 @@ public class FieldGenerator : MonoBehaviour
 					index = Random.Range (0, wallTags.Length);
 					wallTag = wallTags [index];
 					wallChar = wallChars [index];
-					generatedWalls [wallIndex] = GenerateGameObject (currWallPrefab, row, col, wallTag, wallChar);
+					generatedWalls [wallIndex] = GenerateGameObject (currWallPrefab, row, col, wallTag, wallChar, row.ToString()+"."+col.ToString());
 					ok = true;
 				}
 			}
@@ -153,7 +153,7 @@ public class FieldGenerator : MonoBehaviour
 		}
 	}
 
-	private GameObject GenerateGameObject (GameObject prefab, int row, int col, string gameObjectTag, char gameObjectChar)
+	private GameObject GenerateGameObject (GameObject prefab, int row, int col, string gameObjectTag, char gameObjectChar, string gameObjectName = "", Transform parent = null)
 	{
 		GameObject newGameObject;
 		Vector3 gameObjectPosition;
@@ -162,8 +162,12 @@ public class FieldGenerator : MonoBehaviour
 		newGameObject = Instantiate (prefab) as GameObject;
 		newGameObject.transform.position = gameObjectPosition;
 		newGameObject.tag = gameObjectTag;
-		newGameObject.name = gameObjectChar.ToString();
-		newGameObject.transform.SetParent (fieldSpawnPoint.transform);
+		newGameObject.name = gameObjectName;
+		if (parent == null) {
+			newGameObject.transform.SetParent (fieldSpawnPoint.transform);
+		} else {
+			newGameObject.transform.SetParent (parent);
+		}
 		field [row, col] = gameObjectChar;
 		return newGameObject;
 	}
